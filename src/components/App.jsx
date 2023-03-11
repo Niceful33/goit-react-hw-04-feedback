@@ -1,22 +1,54 @@
-import React from 'react';
-import Feedback from './Feedback';
+import React, { useState } from 'react';
 
-class App extends React.Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+import FeedbackOptions from './FeedbackOptions';
+import Statistics from './Statistics';
+import Section from './Section';
+import Notification from './Notification';
+import { GlobalStyle } from './GlobalStyle';
+import { Layout } from './Layuot/Layuot.styled';
+
+export default function App() {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+  const [total] = useState(0);
+
+  const handleBtnGood = () => {
+    setGood(good + 1);
   };
-  render() {
-    return (
-      <>
-        <Feedback state={this.state} />
-      </>
-      // <Layout>
-      //   <Feedback state={this.state} />
-      //   <GlobalStyle />
-      // </Layout>
-    );
-  }
+  const handleBtnNeutral = () => {
+    setNeutral(neutral + 1);
+  };
+  const handleBtnBad = () => {
+    setBad(bad + 1);
+  };
+  const countTotalFeedback = total + good + neutral + bad;
+  const countPositivePer = Math.round((good / countTotalFeedback) * 100);
+  return (
+    <>
+      <Layout>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            onBtnGood={handleBtnGood}
+            onBtnNeutral={handleBtnNeutral}
+            onBtnBad={handleBtnBad}
+          />
+        </Section>
+        <Section title="Statistics:">
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={countTotalFeedback}
+            positivePer={countPositivePer}
+          />
+        </Section>
+        <Notification
+          message="There is no feedback"
+          total={countTotalFeedback}
+        />
+        <GlobalStyle />
+      </Layout>
+    </>
+  );
 }
-export default App;

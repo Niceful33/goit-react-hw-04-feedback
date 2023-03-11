@@ -5,9 +5,9 @@ import { OptinsItem, OptionsTotal } from './Statistics.styled';
 const Statistics = ({ good, neutral, bad, total, positivePer }) =>
   total !== 0 && (
     <>
-      <OptinsItem>Good:{good}</OptinsItem>
-      <OptinsItem>Neutral:{neutral}</OptinsItem>
-      <OptinsItem>Bad:{bad}</OptinsItem>
+      <OptinsItem>Good: {good}</OptinsItem>
+      <OptinsItem>Neutral: {neutral}</OptinsItem>
+      <OptinsItem>Bad: {bad}</OptinsItem>
       <OptionsTotal>Total: {total}</OptionsTotal>
       <OptionsTotal>
         Positive feedback:
